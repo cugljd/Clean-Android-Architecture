@@ -2,7 +2,7 @@ package com.clean.exercise201
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
 import org.junit.rules.TestRule
@@ -12,7 +12,7 @@ import org.junit.runners.model.Statement
 class DispatcherTestRule : TestRule {
 
     @ExperimentalCoroutinesApi
-    val testDispatcher = TestCoroutineDispatcher()
+    val testDispatcher = StandardTestDispatcher()
 
     @ExperimentalCoroutinesApi
     override fun apply(base: Statement?, description: Description?): Statement {
@@ -23,7 +23,6 @@ class DispatcherTestRule : TestRule {
 
         } finally {
             Dispatchers.resetMain()
-            testDispatcher.cleanupTestCoroutines()
         }
         return base!!
     }

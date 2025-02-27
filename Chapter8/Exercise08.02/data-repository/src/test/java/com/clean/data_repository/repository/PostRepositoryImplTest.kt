@@ -6,7 +6,7 @@ import com.clean.domain.entity.Post
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert
 import org.junit.Test
 import org.mockito.kotlin.mock
@@ -23,7 +23,7 @@ class PostRepositoryImplTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun testGetPosts() = runBlockingTest {
+    fun testGetPosts() = runTest {
         val posts = listOf(Post(1, 1, "title", "body"))
         whenever(remotePostDataSource.getPosts()).thenReturn(flowOf(posts))
         val result = repositoryImpl.getPosts().first()
@@ -33,7 +33,7 @@ class PostRepositoryImplTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun testGetPost() = runBlockingTest {
+    fun testGetPost() = runTest {
         val id = 1L
         val post = Post(id, 1, "title", "body")
         whenever(remotePostDataSource.getPost(id)).thenReturn(flowOf(post))

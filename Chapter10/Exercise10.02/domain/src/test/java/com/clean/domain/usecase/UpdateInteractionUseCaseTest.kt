@@ -5,7 +5,7 @@ import com.clean.domain.repository.InteractionRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert
 import org.junit.Test
 import org.mockito.kotlin.mock
@@ -21,7 +21,7 @@ class UpdateInteractionUseCaseTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun testProcess() = runBlockingTest {
+    fun testProcess() = runTest {
         val interaction = Interaction(10)
         val request = UpdateInteractionUseCase.Request(interaction)
         whenever(interactionRepository.saveInteraction(interaction)).thenReturn(flowOf(interaction))

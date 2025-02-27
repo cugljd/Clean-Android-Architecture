@@ -3,15 +3,17 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'org.jetbrains.kotlin.plugin.compose'
 }
 
 android {
-    compileSdk defaultCompileSdkVersion
+    namespace "com.clean.app"
+    compileSdk 35
 
     defaultConfig {
         applicationId "com.clean.app"
-        minSdk defaultMinSdkVersion
-        targetSdk defaultTargetSdkVersion
+        minSdk 21
+        targetSdk 35
         versionCode 1
         versionName "1.0"
 
@@ -19,9 +21,6 @@ android {
         testInstrumentationRunnerArguments clearPackageData: 'true'
         testOptions {
             execution 'ANDROIDX_TEST_ORCHESTRATOR'
-        }
-        vectorDrawables {
-            useSupportLibrary true
         }
     }
 
@@ -32,18 +31,14 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility javaCompileVersion
-        targetCompatibility javaCompileVersion
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = jvmTarget
-        useIR = true
+        jvmTarget = "11"
     }
     buildFeatures {
         compose true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion versions.compose
     }
     packagingOptions {
         resources {
@@ -60,28 +55,28 @@ dependencies {
     implementation(project(path: ":data-remote"))
     implementation(project(path: ":data-local"))
     implementation(project(path: ":data-repository"))
-    implementation androidx.core
-    implementation androidx.appCompat
-    implementation material.material
-    implementation androidx.composeUi
-    implementation androidx.composeMaterial
-    implementation androidx.composeUiToolingPreview
-    implementation androidx.lifecycleRuntimeKtx
-    implementation androidx.composeActivity
-    implementation androidx.navigationCompose
-    implementation androidx.hiltNavigationCompose
-    implementation di.hiltAndroid
-    kapt di.hiltCompiler
-    testImplementation test.junit
-    androidTestImplementation androidTest.junit
-    androidTestImplementation androidTest.espressoCore
-    androidTestImplementation androidTest.idlingResource
-    androidTestImplementation androidTest.core
-    androidTestImplementation androidTest.rules
-    androidTestImplementation androidTest.runner
-    androidTestImplementation androidTest.hilt
-    kaptAndroidTest androidTest.hiltCompiler
-    androidTestImplementation androidTest.composeUiTestJunit
-    debugImplementation androidTest.composeManifest
-    androidTestUtil androidTest.orchestrator
+    implementation "androidx.core:core-ktx:1.15.0"
+    implementation "androidx.appcompat:appcompat:1.7.0"
+    implementation "com.google.android.material:material:1.12.0"
+    implementation "androidx.compose.ui:ui:1.7.5"
+    implementation "androidx.compose.material:material:1.7.5"
+    implementation "androidx.compose.ui:ui-tooling-preview:1.7.5"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.8.7"
+    implementation "androidx.activity:activity-compose:1.9.3"
+    implementation "androidx.navigation:navigation-compose:2.8.4"
+    implementation "androidx.hilt:hilt-navigation-compose:1.2.0"
+    implementation "com.google.dagger:hilt-android:2.52"
+    kapt "com.google.dagger:hilt-compiler:2.52"
+    testImplementation "junit:junit:4.13.2"
+    androidTestImplementation "androidx.test.ext:junit:1.2.1"
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.6.1"
+    androidTestImplementation "androidx.test.espresso:espresso-idling-resource:3.6.1"
+    androidTestImplementation "androidx.test:core:1.6.1"
+    androidTestImplementation "androidx.test:rules:1.6.1"
+    androidTestImplementation "androidx.test:runner:1.6.2"
+    androidTestImplementation "com.google.dagger:hilt-android-testing:2.52"
+    kaptAndroidTest "com.google.dagger:hilt-android-compiler:2.52"
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:1.7.5"
+    debugImplementation "androidx.compose.ui:ui-test-manifest:1.7.5"
+    androidTestUtil "androidx.test:orchestrator:1.5.1"
 }

@@ -7,8 +7,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -18,7 +18,7 @@ import org.mockito.kotlin.mock
 class UseCaseTest {
 
     @ExperimentalCoroutinesApi
-    private val configuration = UseCase.Configuration(TestCoroutineDispatcher())
+    private val configuration = UseCase.Configuration(StandardTestDispatcher())
     private val request = mock<UseCase.Request>()
     private val response = mock<UseCase.Response>()
 
@@ -39,7 +39,7 @@ class UseCaseTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun testExecuteSuccess() = runBlockingTest {
+    fun testExecuteSuccess() = runTest {
         val result = useCase.execute(request).first()
         assertEquals(Result.Success(response), result)
     }
@@ -56,7 +56,7 @@ class UseCaseTest {
             }
 
         }
-        runBlockingTest {
+        runTest {
             val result = useCase.execute(request).first()
             assertTrue((result as Result.Error).exception is UseCaseException.UserException)
         }
@@ -74,7 +74,7 @@ class UseCaseTest {
             }
 
         }
-        runBlockingTest {
+        runTest {
             val result = useCase.execute(request).first()
             assertTrue((result as Result.Error).exception is UseCaseException.PostException)
         }
@@ -92,7 +92,7 @@ class UseCaseTest {
             }
 
         }
-        runBlockingTest {
+        runTest {
             val result = useCase.execute(request).first()
             assertTrue((result as Result.Error).exception is UseCaseException.UnknownException)
         }

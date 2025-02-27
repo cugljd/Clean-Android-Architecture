@@ -6,9 +6,9 @@ import com.clean.presentation_common.state.UiState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import org.junit.After
 import org.junit.Assert.assertEquals
@@ -20,7 +20,7 @@ import org.mockito.kotlin.whenever
 class UserViewModelTest {
 
     @ExperimentalCoroutinesApi
-    private val testDispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher()
+    private val testDispatcher = StandardTestDispatcher()
     private val useCase = mock<GetUserUseCase>()
     private val converter = mock<UserConverter>()
     private val viewModel = UserViewModel(useCase, converter)
@@ -35,12 +35,11 @@ class UserViewModelTest {
     @After
     fun tearDown() {
         Dispatchers.resetMain()
-        testDispatcher.cleanupTestCoroutines()
     }
 
     @ExperimentalCoroutinesApi
     @Test
-    fun testLoadUser() = runBlockingTest {
+    fun testLoadUser() = runTest {
         assertEquals(UiState.Loading, viewModel.userFlow.value)
         val userId = 1L
         val uiState = mock<UiState<UserModel>>()

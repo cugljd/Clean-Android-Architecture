@@ -5,7 +5,7 @@ import com.clean.domain.repository.UserRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert
 import org.junit.Test
 import org.mockito.kotlin.mock
@@ -21,7 +21,7 @@ class GetUserUseCaseTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun testProcess() = runBlockingTest {
+    fun testProcess() = runTest {
         val request = GetUserUseCase.Request(0L)
         val user = User(1L, "name", "username", "email")
         whenever(userRepository.getUser(request.userId)).thenReturn(flowOf(user))

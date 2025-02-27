@@ -5,7 +5,7 @@ import com.clean.domain.repository.PostRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.mockito.kotlin.mock
@@ -22,7 +22,7 @@ class GetPostUseCaseTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun testProcess() = runBlockingTest {
+    fun testProcess() = runTest {
         val request = GetPostUseCase.Request(0L)
         val post = Post(1L, 1L, "title", "body")
         whenever(postRepository.getPost(request.postId)).thenReturn(flowOf(post))

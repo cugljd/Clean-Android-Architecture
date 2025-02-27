@@ -1,7 +1,7 @@
 package com.clean.exercise201
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
@@ -13,7 +13,7 @@ class NumberAdderTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun testAdd() = runBlockingTest {
+    fun testAdd() = runTest {
         val adder = NumberAdder(dispatcherTestRule.testDispatcher, 0)
         assertEquals(5, adder.add(1, 4))
     }

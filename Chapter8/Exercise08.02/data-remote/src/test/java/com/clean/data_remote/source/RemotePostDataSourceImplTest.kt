@@ -8,7 +8,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert
 import org.junit.Test
 import org.mockito.kotlin.mock
@@ -21,7 +21,7 @@ class RemotePostDataSourceImplTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun testGetPosts() = runBlockingTest {
+    fun testGetPosts() = runTest {
         val remotePosts = listOf(PostApiModel(1, 1, "title", "body"))
         val expectedPosts = listOf(Post(1, 1, "title", "body"))
         whenever(postService.getPosts()).thenReturn(remotePosts)
@@ -31,7 +31,7 @@ class RemotePostDataSourceImplTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun testGetPost() = runBlockingTest {
+    fun testGetPost() = runTest {
         val id = 1L
         val remotePost = PostApiModel(id, 1, "title", "body")
         val expectedPost = Post(id, 1, "title", "body")
@@ -42,7 +42,7 @@ class RemotePostDataSourceImplTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun testGetPostsThrowsError() = runBlockingTest {
+    fun testGetPostsThrowsError() = runTest {
         whenever(postService.getPosts()).thenThrow(RuntimeException())
         postDataSource.getPosts().catch {
             Assert.assertTrue(it is UseCaseException.PostException)
@@ -51,7 +51,7 @@ class RemotePostDataSourceImplTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun testGetPostThrowsError() = runBlockingTest {
+    fun testGetPostThrowsError() = runTest {
         val id = 1L
         whenever(postService.getPost(id)).thenThrow(RuntimeException())
         postDataSource.getPost(id).catch {

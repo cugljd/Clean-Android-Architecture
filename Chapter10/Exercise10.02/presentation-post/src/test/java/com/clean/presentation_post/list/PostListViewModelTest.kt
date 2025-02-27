@@ -12,9 +12,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import org.junit.After
 import org.junit.Assert.assertEquals
@@ -27,7 +27,7 @@ import org.mockito.kotlin.whenever
 class PostListViewModelTest {
 
     @ExperimentalCoroutinesApi
-    private val testDispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher()
+    private val testDispatcher = StandardTestDispatcher()
     private val getPostsWithUsersWithInteractionUseCase =
         mock<GetPostsWithUsersWithInteractionUseCase>()
     private val converter = mock<PostListConverter>()
@@ -36,7 +36,7 @@ class PostListViewModelTest {
 
     @ExperimentalCoroutinesApi
     @Before
-    fun setUp() = runBlockingTest {
+    fun setUp() = runTest {
         Dispatchers.setMain(testDispatcher)
         viewModel = PostListViewModel(
             getPostsWithUsersWithInteractionUseCase,
@@ -49,12 +49,11 @@ class PostListViewModelTest {
     @After
     fun tearDown() {
         Dispatchers.resetMain()
-        testDispatcher.cleanupTestCoroutines()
     }
 
     @ExperimentalCoroutinesApi
     @Test
-    fun testHandleActionLoad() = runBlockingTest {
+    fun testHandleActionLoad() = runTest {
         assertEquals(UiState.Loading, viewModel.uiStateFlow.value)
         val uiState = mock<UiState<PostListModel>>()
         val result = mock<Result<GetPostsWithUsersWithInteractionUseCase.Response>>()
@@ -74,7 +73,7 @@ class PostListViewModelTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun testHandleActionPostClick() = runBlockingTest {
+    fun testHandleActionPostClick() = runTest {
         val postId = 3L
         val interaction = Interaction(10)
         whenever(
@@ -110,7 +109,7 @@ class PostListViewModelTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun testHandleActionUserClick() = runBlockingTest {
+    fun testHandleActionUserClick() = runTest {
         val userId = 3L
         val interaction = Interaction(10)
         whenever(

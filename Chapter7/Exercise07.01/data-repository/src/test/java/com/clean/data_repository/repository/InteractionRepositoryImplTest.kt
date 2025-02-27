@@ -6,7 +6,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.mockito.kotlin.mock
@@ -20,7 +20,7 @@ class InteractionRepositoryImplTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun testGetInteraction() = runBlockingTest {
+    fun testGetInteraction() = runTest {
         val interaction = Interaction(10)
         whenever(localInteractionDataSource.getInteraction()).thenReturn(flowOf(interaction))
         val result = repositoryImpl.getInteraction().first()
@@ -29,7 +29,7 @@ class InteractionRepositoryImplTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun testSaveInteraction() = runBlockingTest {
+    fun testSaveInteraction() = runTest {
         val interaction = Interaction(10)
         whenever(localInteractionDataSource.getInteraction()).thenReturn(flowOf(interaction))
         val result = repositoryImpl.saveInteraction(interaction).first()

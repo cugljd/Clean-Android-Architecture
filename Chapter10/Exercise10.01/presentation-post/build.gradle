@@ -3,14 +3,16 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'org.jetbrains.kotlin.plugin.compose'
 }
 
 android {
-    compileSdk defaultCompileSdkVersion
+    namespace "com.clean.presentation_post"
+    compileSdk 35
 
     defaultConfig {
-        minSdk defaultMinSdkVersion
-        targetSdk defaultTargetSdkVersion
+        minSdk 21
+        targetSdk 35
         versionCode 1
         versionName "1.0"
 
@@ -25,34 +27,30 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility javaCompileVersion
-        targetCompatibility javaCompileVersion
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = jvmTarget
-        useIR = true
+        jvmTarget = "11"
     }
     buildFeatures {
         compose true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion versions.compose
     }
 }
 
 dependencies {
     implementation(project(path: ":domain"))
     implementation(project(path: ":presentation-common"))
-    implementation coroutines.coroutinesAndroid
-    implementation androidx.composeUi
-    implementation androidx.composeMaterial
-    implementation androidx.viewModelKtx
-    implementation androidx.viewModelCompose
-    implementation androidx.lifecycleRuntimeKtx
-    implementation androidx.navigationCompose
-    implementation di.hiltAndroid
-    kapt di.hiltCompiler
-    testImplementation test.junit
-    testImplementation test.coroutines
-    testImplementation test.mockito
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0"
+    implementation "androidx.compose.ui:ui:1.7.5"
+    implementation "androidx.compose.material:material:1.7.5"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.8.7"
+    implementation "androidx.navigation:navigation-compose:2.8.4"
+    implementation "com.google.dagger:hilt-android:2.52"
+    kapt "com.google.dagger:hilt-compiler:2.52"
+    testImplementation "junit:junit:4.13.2"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.9.0"
+    testImplementation "org.mockito.kotlin:mockito-kotlin:5.4.0"
 }

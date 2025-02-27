@@ -10,7 +10,7 @@ import com.clean.domain.repository.UserRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.mockito.kotlin.mock
@@ -31,7 +31,7 @@ class GetPostsWithUsersWithInteractionUseCaseTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun testProcess() = runBlockingTest {
+    fun testProcess() = runTest {
         val user1 = User(1L, "name1", "username1", "email1")
         val user2 = User(2L, "name2", "username2", "email2")
         val post1 = Post(1L, user1.id, "title1", "body1")

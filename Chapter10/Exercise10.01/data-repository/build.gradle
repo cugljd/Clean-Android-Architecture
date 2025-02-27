@@ -4,11 +4,12 @@ plugins {
 }
 
 android {
-    compileSdk defaultCompileSdkVersion
+    namespace "com.clean.data_repository"
+    compileSdk 35
 
     defaultConfig {
-        minSdk defaultMinSdkVersion
-        targetSdk defaultTargetSdkVersion
+        minSdk 21
+        targetSdk 35
         versionCode 1
         versionName "1.0"
 
@@ -23,18 +24,18 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility javaCompileVersion
-        targetCompatibility javaCompileVersion
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = jvmTarget
+        jvmTarget = "11"
     }
 }
 
 dependencies {
     implementation(project(path: ":domain"))
-    implementation coroutines.coroutinesAndroid
-    testImplementation test.junit
-    testImplementation test.coroutines
-    testImplementation test.mockito
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0"
+    testImplementation "junit:junit:4.13.2"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.9.0"
+    testImplementation "org.mockito.kotlin:mockito-kotlin:5.4.0"
 }

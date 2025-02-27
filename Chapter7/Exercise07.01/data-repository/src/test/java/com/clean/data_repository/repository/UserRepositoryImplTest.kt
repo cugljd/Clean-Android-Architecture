@@ -6,7 +6,7 @@ import com.clean.domain.entity.User
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.mockito.kotlin.mock
@@ -22,7 +22,7 @@ class UserRepositoryImplTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun testGetUsers() = runBlockingTest {
+    fun testGetUsers() = runTest {
         val users = listOf(User(1, "name", "username", "email"))
         whenever(remoteUserDataSource.getUsers()).thenReturn(flowOf(users))
         val result = repositoryImpl.getUsers().first()
@@ -32,7 +32,7 @@ class UserRepositoryImplTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun testGetUser() = runBlockingTest {
+    fun testGetUser() = runTest {
         val id = 1L
         val user = User(id, "name", "username", "email")
         whenever(remoteUserDataSource.getUser(id)).thenReturn(flowOf(user))

@@ -9,7 +9,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.mockito.kotlin.any
@@ -24,7 +24,7 @@ class LocalInteractionDataSourceImplTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun testGetInteraction() = runBlockingTest {
+    fun testGetInteraction() = runTest {
         val clicks = 10
         val interaction = Interaction(clicks)
         val preferences = mock<Preferences>()
@@ -36,7 +36,7 @@ class LocalInteractionDataSourceImplTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun testSaveInteraction() = runBlockingTest {
+    fun testSaveInteraction() = runTest {
         val clicks = 10
         val interaction = Interaction(clicks)
         val preferences = mock<MutablePreferences>()

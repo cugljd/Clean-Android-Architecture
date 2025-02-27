@@ -6,7 +6,7 @@ import com.clean.domain.entity.User
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert
 import org.junit.Test
 import org.mockito.kotlin.mock
@@ -20,7 +20,7 @@ class LocalUserDataSourceImplTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun testGetUsers() = runBlockingTest {
+    fun testGetUsers() = runTest {
         val localUsers = listOf(UserEntity(1, "name", "username", "email"))
         val expectedUsers = listOf(User(1, "name", "username", "email"))
         whenever(userDao.getUsers()).thenReturn(flowOf(localUsers))
@@ -30,7 +30,7 @@ class LocalUserDataSourceImplTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun testAddUsers() = runBlockingTest {
+    fun testAddUsers() = runTest {
         val localUsers = listOf(UserEntity(1, "name", "username", "email"))
         val users = listOf(User(1, "name", "username", "email"))
         userDataSource.addUsers(users)

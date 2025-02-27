@@ -1,15 +1,15 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     ext {
-        javaCompileVersion = JavaVersion.VERSION_1_8
-        jvmTarget = "1.8"
-        defaultCompileSdkVersion = 31
-        defaultTargetSdkVersion = 31
+        javaCompileVersion = JavaVersion.VERSION_11
+        jvmTarget = "11"
+        defaultCompileSdkVersion = 35
+        defaultTargetSdkVersion = 35
         defaultMinSdkVersion = 21
         versions = [
-                androidGradlePlugin  : "7.0.4",
-                kotlin               : "1.5.31",
-                hilt                 : "2.40.5",
+                androidGradlePlugin  : "8.7.2",
+                kotlin               : "2.0.21",
+                hilt                 : "2.52",
                 coreKtx              : "1.7.0",
                 appCompat            : "1.4.1",
                 compose              : "1.0.5",
@@ -34,63 +34,63 @@ buildscript {
                 orchestrator         : "1.4.1"
         ]
         gradlePlugins = [
-                android: "com.android.tools.build:gradle:${versions.androidGradlePlugin}",
-                kotlin : "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}",
-                hilt   : "com.google.dagger:hilt-android-gradle-plugin:${versions.hilt}"
+                android: "com.android.tools.build:gradle:8.7.2",
+                kotlin : "org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.21",
+                hilt   : "com.google.dagger:hilt-android-gradle-plugin:2.52"
         ]
         androidx = [
-                core                   : "androidx.core:core-ktx:${versions.coreKtx}",
-                appCompat              : "androidx.appcompat:appcompat:${versions.appCompat}",
-                composeUi              : "androidx.compose.ui:ui:${versions.compose}",
-                composeMaterial        : "androidx.compose.material:material:${versions.compose}",
-                composeUiToolingPreview: "androidx.compose.ui:ui-tooling-preview:${versions.compose}",
-                lifecycleRuntimeKtx    : "androidx.lifecycle:lifecycle-runtime-ktx:${versions.lifecycleRuntimeKtx}",
-                composeActivity        : "androidx.activity:activity-compose:${versions.activityCompose}",
-                viewModelKtx           : "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.viewModel}",
-                viewModelCompose       : "androidx.lifecycle:lifecycle-viewmodel-compose:${versions.viewModel}",
-                navigationCompose      : "androidx.navigation:navigation-compose:${versions.navigationCompose}",
-                hiltNavigationCompose  : "androidx.hilt:hilt-navigation-compose:${versions.hiltNavigationCompose}"
+                core                   : "androidx.core:core-ktx:1.7.0",
+                appCompat              : "androidx.appcompat:appcompat:1.4.1",
+                composeUi              : "androidx.compose.ui:ui:1.0.5",
+                composeMaterial        : "androidx.compose.material:material:1.0.5",
+                composeUiToolingPreview: "androidx.compose.ui:ui-tooling-preview:1.0.5",
+                lifecycleRuntimeKtx    : "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0",
+                composeActivity        : "androidx.activity:activity-compose:1.4.0",
+                viewModelKtx           : "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0",
+                viewModelCompose       : "androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0",
+                navigationCompose      : "androidx.navigation:navigation-compose:2.4.0-rc01",
+                hiltNavigationCompose  : "androidx.hilt:hilt-navigation-compose:1.0.0-rc01"
         ]
         material = [
-                material: "com.google.android.material:material:${versions.material}"
+                material: "com.google.android.material:material:1.5.0"
         ]
         coroutines = [
-                coroutinesAndroid: "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutines}"
+                coroutinesAndroid: "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
         ]
         di = [
-                hiltAndroid : "com.google.dagger:hilt-android:${versions.hilt}",
-                hiltCompiler: "com.google.dagger:hilt-compiler:${versions.hilt}"
+                hiltAndroid : "com.google.dagger:hilt-android:2.52",
+                hiltCompiler: "com.google.dagger:hilt-compiler:2.52"
         ]
         network = [
-                okHttp       : "com.squareup.okhttp3:okhttp:${versions.okHttp}",
-                retrofit     : "com.squareup.retrofit2:retrofit:${versions.retrofit}",
-                retrofitMoshi: "com.squareup.retrofit2:converter-moshi:${versions.retrofit}",
-                moshi        : "com.squareup.moshi:moshi:${versions.moshi}",
-                moshiKotlin  : "com.squareup.moshi:moshi-kotlin:${versions.moshi}"
+                okHttp       : "com.squareup.okhttp3:okhttp:4.9.0",
+                retrofit     : "com.squareup.retrofit2:retrofit:2.9.0",
+                retrofitMoshi: "com.squareup.retrofit2:converter-moshi:2.9.0",
+                moshi        : "com.squareup.moshi:moshi:1.13.0",
+                moshiKotlin  : "com.squareup.moshi:moshi-kotlin:1.13.0"
         ]
         persistence = [
-                roomRuntime : "androidx.room:room-runtime:${versions.room}",
-                roomKtx     : "androidx.room:room-ktx:${versions.room}",
-                roomCompiler: "androidx.room:room-compiler:${versions.room}",
-                datastore   : "androidx.datastore:datastore-preferences:${versions.datastore}"
+                roomRuntime : "androidx.room:room-runtime:2.4.0",
+                roomKtx     : "androidx.room:room-ktx:2.4.0",
+                roomCompiler: "androidx.room:room-compiler:2.4.0",
+                datastore   : "androidx.datastore:datastore-preferences:1.0.0"
         ]
         test = [
-                junit     : "junit:junit:${versions.junit}",
-                coroutines: "org.jetbrains.kotlinx:kotlinx-coroutines-test:${versions.coroutines}",
-                mockito   : "org.mockito.kotlin:mockito-kotlin:${versions.mockito}"
+                junit     : "junit:junit:4.13.2",
+                coroutines: "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2",
+                mockito   : "org.mockito.kotlin:mockito-kotlin:4.0.0"
         ]
         androidTest = [
-                junit             : "androidx.test.ext:junit:${versions.espressoJunit}",
-                espressoCore      : "androidx.test.espresso:espresso-core:${versions.espressoCore}",
-                idlingResource    : "androidx.test.espresso:espresso-idling-resource:${versions.espressoCore}",
-                composeUiTestJunit: "androidx.compose.ui:ui-test-junit4:${versions.compose}",
-                composeManifest   : "androidx.compose.ui:ui-test-manifest:${versions.compose}",
-                hilt              : "com.google.dagger:hilt-android-testing:${versions.hilt}",
-                hiltCompiler      : "com.google.dagger:hilt-android-compiler:${versions.hilt}",
-                core              : "androidx.test:core:${versions.androidTestCore}",
-                runner            : "androidx.test:runner:${versions.androidTestCore}",
-                rules             : "androidx.test:rules:${versions.androidTestCore}",
-                orchestrator      : "androidx.test:orchestrator:${versions.orchestrator}"
+                junit             : "androidx.test.ext:junit:1.1.3",
+                espressoCore      : "androidx.test.espresso:espresso-core:3.4.0",
+                idlingResource    : "androidx.test.espresso:espresso-idling-resource:3.4.0",
+                composeUiTestJunit: "androidx.compose.ui:ui-test-junit4:1.0.5",
+                composeManifest   : "androidx.compose.ui:ui-test-manifest:1.0.5",
+                hilt              : "com.google.dagger:hilt-android-testing:2.52",
+                hiltCompiler      : "com.google.dagger:hilt-android-compiler:2.52",
+                core              : "androidx.test:core:1.4.0",
+                runner            : "androidx.test:runner:1.4.0",
+                rules             : "androidx.test:rules:1.4.0",
+                orchestrator      : "androidx.test:orchestrator:1.4.1"
         ]
     }
 
@@ -99,12 +99,16 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath gradlePlugins.android
-        classpath gradlePlugins.kotlin
-        classpath gradlePlugins.hilt
+        classpath "com.android.tools.build:gradle:8.7.2"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.21"
+        classpath "com.google.dagger:hilt-android-gradle-plugin:2.52"
     }
 }
 
+plugins {
+    id "org.jetbrains.kotlin.plugin.compose" version "2.0.21"
+}
+
 task clean(type: Delete) {
-    delete rootProject.buildDir
+    delete rootProject.layout.buildDirectory
 }

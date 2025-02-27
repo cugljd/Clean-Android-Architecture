@@ -6,7 +6,7 @@ import com.clean.domain.entity.Post
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert
 import org.junit.Test
 import org.mockito.kotlin.mock
@@ -20,7 +20,7 @@ class LocalPostDataSourceImplTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun testGetPosts() = runBlockingTest {
+    fun testGetPosts() = runTest {
         val localPosts = listOf(PostEntity(1, 1, "title", "body"))
         val expectedPosts = listOf(Post(1, 1, "title", "body"))
         whenever(postDao.getPosts()).thenReturn(flowOf(localPosts))
@@ -30,7 +30,7 @@ class LocalPostDataSourceImplTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun testAddUsers() = runBlockingTest {
+    fun testAddUsers() = runTest {
         val localPosts = listOf(PostEntity(1, 1, "title", "body"))
         val posts = listOf(Post(1, 1, "title", "body"))
         postDataSource.addPosts(posts)

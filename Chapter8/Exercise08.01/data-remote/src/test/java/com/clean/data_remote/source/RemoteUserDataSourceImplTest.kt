@@ -8,7 +8,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert
 import org.junit.Test
 import org.mockito.kotlin.mock
@@ -21,7 +21,7 @@ class RemoteUserDataSourceImplTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun testGetUsers() = runBlockingTest {
+    fun testGetUsers() = runTest {
         val remoteUsers = listOf(UserApiModel(1, "name", "username", "email"))
         val expectedUsers = listOf(User(1, "name", "username", "email"))
         whenever(userService.getUsers()).thenReturn(remoteUsers)
@@ -31,7 +31,7 @@ class RemoteUserDataSourceImplTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun testGetUser() = runBlockingTest {
+    fun testGetUser() = runTest {
         val id = 1L
         val remoteUser = UserApiModel(id, "name", "username", "email")
         val user = User(id, "name", "username", "email")
@@ -42,7 +42,7 @@ class RemoteUserDataSourceImplTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun testGetUsersThrowsError() = runBlockingTest {
+    fun testGetUsersThrowsError() = runTest {
         whenever(userService.getUsers()).thenThrow(RuntimeException())
         userDataSource.getUsers().catch {
             Assert.assertTrue(it is UseCaseException.UserException)
@@ -51,7 +51,7 @@ class RemoteUserDataSourceImplTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun testGetUserThrowsError() = runBlockingTest {
+    fun testGetUserThrowsError() = runTest {
         val id = 1L
         whenever(userService.getUser(id)).thenThrow(RuntimeException())
         userDataSource.getUser(id).catch {
